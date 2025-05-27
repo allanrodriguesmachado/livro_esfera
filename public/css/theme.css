@@ -70,3 +70,136 @@ body.dark-mode .footer {
 body.dark-mode .footer-link {
     color: #66b0ff;
 }
+
+
+/* Cards no modo escuro */
+body.dark-mode .card {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    color: #eee;
+}
+body.dark-mode .card .card-title,
+body.dark-mode .card .card-text {
+    color: #ddd;
+}
+
+/* Cards no modo claro */
+.card {
+    border: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+.card:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,0.15);
+}
+
+
+/* ===================== */
+/* DATATABLE DARK MODE  */
+/* ===================== */
+body.dark-mode .dataTable,
+body.dark-mode table.dataTable,
+body.dark-mode .table {
+    background-color: #1e1e1e !important;
+    color: #eee !important;
+    border-color: #333 !important;
+}
+
+body.dark-mode .dataTable th,
+body.dark-mode .dataTable td {
+    background-color: #1e1e1e !important;
+    color: #eee !important;
+    border-color: #444 !important;
+}
+
+body.dark-mode .dataTable thead th {
+    background-color: #2c2c2c !important;
+    color: #fff !important;
+    border-color: #444 !important;
+}
+
+body.dark-mode .dataTable tfoot th {
+    background-color: #2c2c2c !important;
+    color: #ccc !important;
+    border-color: #444 !important;
+}
+
+body.dark-mode .dataTable tbody tr:hover {
+    background-color: #2a2a2a !important;
+}
+
+/* Search input e length select */
+body.dark-mode .dataTables_wrapper .dataTables_filter input,
+body.dark-mode .dataTables_wrapper .dataTables_length select {
+    background-color: #2a2a2a !important;
+    color: #eee !important;
+    border: 1px solid #555 !important;
+}
+
+/* Paginação */
+body.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button {
+    background-color: #2a2a2a !important;
+    color: #ccc !important;
+    border: 1px solid #555 !important;
+}
+
+body.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background-color: #0d6efd !important;
+    color: white !important;
+    border-color: #0d6efd !important;
+}
+
+/* Info (ex: "Mostrando X a Y de Z") */
+body.dark-mode .dataTables_wrapper .dataTables_info {
+    color: #bbb !important;
+}
+
+
+/* Texto informativo "Mostrando X até Y de Z" */
+body.dark-mode .dataTables_wrapper .dataTables_info,
+body.dark-mode .dt-info {
+    color: #bbb !important;
+}
+
+/* Container da paginação */
+body.dark-mode .dataTables_wrapper .dt-paging,
+body.dark-mode .pagination {
+    background-color: transparent !important;
+}
+
+/* Botões da paginação */
+body.dark-mode .page-link {
+    background-color: #2a2a2a !important;
+    color: #ccc !important;
+    border-color: #444 !important;
+}
+
+body.dark-mode .page-item.disabled .page-link {
+    background-color: #1e1e1e !important;
+    color: #555 !important;
+    border-color: #444 !important;
+    opacity: 0.5;
+}
+
+body.dark-mode .page-item.active .page-link {
+    background-color: #0d6efd !important;
+    color: #fff !important;
+    border-color: #0d6efd !important;
+}
+
+
+body.dark-mode .dataTables_wrapper .dt-length,
+body.dark-mode .dataTables_wrapper .dt-length label {
+    color: #ccc !important;
+}
+
+body.dark-mode select.form-select,
+body.dark-mode .form-select {
+    background-color: #2a2a2a !important;
+    color: #eee !important;
+    border-color: #444 !important;
+}
+
+body.dark-mode .form-select option {
+    background-color: #1e1e1e;
+    color: #eee;
+}

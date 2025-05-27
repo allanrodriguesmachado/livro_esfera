@@ -81,9 +81,31 @@ VALUES (1, 1);
 INSERT INTO livro_assunto (livro_id, assunto_id)
 VALUES (1, 1);
 
+-- 1. Cadastrar Autor
+INSERT INTO autores (nome)
+VALUES ('José da Silva');
+
+-- 2. Cadastrar Assunto
+INSERT INTO assuntos (nome)
+VALUES ('Tecnologia');
+
+-- 3. Cadastrar Livro
+INSERT INTO livros (titulo, editora, ano_publicacao, valor)
+VALUES ('Livro Exemplo', 'Editora XPTO', 2024, 79.90);
+
+-- 4. Relacionar Livro com Autor (supondo que ambos tenham ID = 1)
+INSERT INTO livro_autor (livro_id, autor_id)
+VALUES (1, 1);
+
+-- 5. Relacionar Livro com Assunto (supondo ID = 1)
+INSERT INTO livro_assunto (livro_id, assunto_id)
+VALUES (1, 1);
 
 
 SELECT *
 FROM view_livros_autores_assuntos
 SELECT *
 FROM livros
+
+
+cache clear  rm -rf data/cache/*
