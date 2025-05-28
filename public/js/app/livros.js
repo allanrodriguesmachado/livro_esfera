@@ -13,7 +13,7 @@ let table = new DataTable('#myTable', {
             title: 'ID',
             visible: false
         },
-        {data: 'titulo', title: 'Título'},
+        { data: 'titulo', title: 'Título' },
         {
             data: 'valor',
             title: 'Valor',
@@ -25,29 +25,18 @@ let table = new DataTable('#myTable', {
                     }).format(data);
                 }
                 return data;
-            }
-    },
+            },
+        },
+        {
+            data: 'acao',
+            title: 'Ação',
+            orderable: false,
+            searchable: false
+        }
     ]
 });
 
-$('#myTable tbody').on('click', 'tr', function() {
-    const data = table.row(this).data();
-    if (data) {
-        console.log('ID do livro clicado:', data.livro_id
-        );
-        console.log('Dados completos:', data);
-
-        // Remove seleção anterior
-        table.$('tr.selected').removeClass('selected');
-        // Adiciona seleção na linha atual
-        $(this).addClass('selected');
-    }
-});
-
-
-
-export function fetch(url)
-{
+export function fetch(url) {
     mostrarLoader();
 
     $.ajax({
@@ -60,9 +49,22 @@ export function fetch(url)
             if (response.status === 'success') {
                 const livros = response.data;
                 const $container = $('#livros-container');
-
                 $container.empty();
-                table.clear().rows.add(livros).draw();
+
+                // Adiciona botões de ação com ícones FA
+                const livrosComAcoes = livros.map(livro => ({
+                    ...livro,
+                    acao: `
+                        <button class="btn btn-sm btn-primary btn-editar" data-id="${livro.id}" title="Editar">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger btn-excluir" data-id="${livro.id}" title="Excluir">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    `
+                }));
+
+                table.clear().rows.add(livrosComAcoes).draw();
             } else {
                 $('#erro').removeClass('d-none').text(response.message);
             }
@@ -74,19 +76,29 @@ export function fetch(url)
     });
 }
 
-function mostrarLoader()
-{
+function mostrarLoader() {
     $('#loaderOverlay').fadeIn();
 }
 
-function esconderLoader()
-{
+function esconderLoader() {
     $('#loaderOverlay').fadeOut();
 }
 
+// Toggle de formulário de cadastro
 $('#btnRegister').on('click', () => {
     $("#livro-hide").toggleClass('d-none');
     $("#livro-cadastro").toggleClass('d-none');
 });
 
+// Evento: excluir livro
+$('#myTable').on('click', '.btn-excluir', function () {
+    const livroId = $(this).data('livro_id');
 
+    console.log(livroId)
+});
+
+$('#myTable').on('click', '.btn-editar', function () {
+    const livroId = $(this).data('livro_id');
+
+    console.log(livroId)
+});
