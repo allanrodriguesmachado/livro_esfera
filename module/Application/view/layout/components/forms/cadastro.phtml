@@ -1,45 +1,152 @@
 <div class="container my-5 d-none" id="livro-cadastro">
-    <form id="formLivro" >
-        <div class="row mb-3">
-            <div class="col-12 col-md-6 mb-3">
-                <label class="form-label fw-bold" for="tituloLivro"><i class="fas fa-book text-dark me-2"></i> Título</label>
-                <input type="text" id="tituloLivro" name="titulo" class="form-control" required>
-            </div>
-
-            <div class="col-12 col-md-6 mb-3">
-                <label class="form-label fw-bold" for="editoraLivro"><i class="fas fa-building text-dark me-2"></i> Editora</label>
-                <input type="text" id="editoraLivro" name="editora" class="form-control" required>
-            </div>
+    <div class="card shadow rounded">
+        <div class="card-header text-white py-3" style="background-color: #192635;">
+            <h3 class="mb-0 fw-bold">
+                📖 Cadastro de Livro
+            </h3>
         </div>
+        <div class="card-body">
+            <form id="formLivro">
+                <div class="row mb-3">
+                    <div class="col-12 col-md-6 mb-3">
+                        <label class="form-label fw-bold" for="tituloLivro">
+                            <i class="fas fa-book text-dark me-2"></i> Título
+                        </label>
+                        <input type="text" id="tituloLivro" name="titulo" class="form-control" required
+                               placeholder="Digite o título do livro">
+                    </div>
 
-        <div class="row mb-3">
-            <div class="col-12 col-md-4 mb-3">
-                <label class="form-label fw-bold" for="anoPublicacao"><i class="fas fa-calendar-alt text-dark me-2"></i> Ano</label>
-                <input type="number" id="anoPublicacao" name="ano_publicacao" class="form-control" required>
-            </div>
+                    <div class="col-12 col-md-6 mb-3">
+                        <label class="form-label fw-bold" for="editoraLivro">
+                            <i class="fas fa-building text-dark me-2"></i> Editora
+                        </label>
+                        <input type="text" id="editoraLivro" name="editora" class="form-control" required
+                               placeholder="Digite a editora">
+                    </div>
+                </div>
 
-            <div class="col-12 col-md-4 mb-3">
-                <label class="form-label fw-bold" for="valorLivro"><i class="fas fa-dollar-sign text-dark me-2"></i> Valor</label>
-                <input type="number" step="0.01" id="valorLivro" name="valor" class="form-control" required>
-            </div>
+                <div class="row mb-3">
+                    <div class="col-12 col-md-4 mb-3">
+                        <label class="form-label fw-bold" for="anoPublicacao">
+                            <i class="fas fa-calendar-alt text-dark me-2"></i> Ano
+                        </label>
+                        <input type="number" id="anoPublicacao" name="ano_publicacao" class="form-control" required
+                               placeholder="Ex: 2024">
+                    </div>
+
+                    <div class="col-12 col-md-4 mb-3">
+                        <label class="form-label fw-bold" for="valorLivro">
+                            <i class="fas fa-dollar-sign text-dark me-2"></i> Valor
+                        </label>
+                        <input type="text" step="0.01" id="valorLivro" name="valor" class="form-control" required
+                               placeholder="Digite o valor do livro">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-12 col-md-6 mb-3">
+                        <label class="form-label fw-bold" for="autorLivro">
+                            <i class="fas fa-user-alt text-dark me-2"></i> Autor
+                        </label>
+                        <div class="input-group">
+                            <select id="autorLivro" name="autor_id" class="form-select" required>
+                                <option value="">Selecione um autor</option>
+                            </select>
+                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
+                                    data-bs-target="#modalAutor">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="invalid-feedback">O campo autor é obrigatório.</div>
+                    </div>
+
+
+                    <div class="col-12 col-md-6 mb-3">
+                        <label class="form-label fw-bold" for="assuntoLivro">
+                            <i class="fas fa-tags text-dark me-2"></i> Assunto
+                        </label>
+                        <div class="input-group">
+                            <select id="assuntoLivro" name="assunto_id" class="form-select" required>
+                                <option value="">Selecione um assunto</option>
+                            </select>
+                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
+                                    data-bs-target="#modalAssunto">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="invalid-feedback">
+                            O campo assunto é obrigatório.
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <button
+                            id="btnSalvar"
+                            type="button"
+                            class="btn fw-bold text-white"
+                            style="background: #e07503 !important; border: none;">
+                        <i class="fas fa-save me-2"></i> Salvar
+                    </button>
+                </div>
+            </form>
         </div>
+    </div>
+</div>
 
-        <div class="row mb-3">
-            <div class="col-12 col-md-6 mb-3">
-                <label class="form-label fw-bold" for="autorLivro"><i class="fas fa-user-alt text-dark me-2"></i> Autor</label>
-                <input type="text" id="autorLivro" name="autor" class="form-control" required>
+
+<!-- Modal Autor -->
+<div class="modal fade" id="modalAutor" tabindex="-1" aria-labelledby="modalAutorLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form id="formNovoAutor" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAutorLabel">Cadastrar Novo Autor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <label for="novoAutor" class="form-label">Nome do autor</label>
+                <div class="input-group mb-3">
+                    <input type="text" id="novoAutor" class="form-control" required>
+                    <button id="btnSalvarAutor" type="button" class="btn btn-success">Salvar</button>
+                </div>
+
+                <hr>
+                <h6>Autores cadastrados:</h6>
+                <ul id="listaAutores" class="list-group">
+                </ul>
             </div>
 
-            <div class="col-12 col-md-6 mb-3">
-                <label class="form-label fw-bold" for="assuntoLivro"><i class="fas fa-tags text-dark me-2"></i> Assunto</label>
-                <input type="text" id="assuntoLivro" name="assunto" class="form-control" required>
-            </div>
-        </div>
+        </form>
+    </div>
+</div>
 
-        <div class="d-flex justify-content-end">
-            <button id="btnSalvar" type="button" class="btn btn-dark">
-                <i class="fas fa-save me-2"></i> Salvar
-            </button>
-        </div>
-    </form>
+<div class="modal fade" id="modalAssunto" tabindex="-1" aria-labelledby="modalAssuntoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form id="formNovoAssunto" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAssuntoLabel">Cadastrar Novo Assunto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+
+
+            <div class="modal-body">
+                <label for="novoAssunto" class="form-label">Nome do assunto</label>
+                <div class="input-group mb-3">
+                    <input type="text" id="novoAssunto" class="form-control" required>
+                    <button id="btnSalvarAssunto" type="button" class="btn btn-success">Salvar</button>
+                </div>
+
+                <hr>
+                <h6>Assuntos cadastrados:</h6>
+                <ul id="listaAssuntos" class="list-group">
+
+                </ul>
+            </div>
+
+            <!--            <div class="modal-footer">-->
+            <!--                <button id="btnSalvarAssunto" type="button" class="btn btn-dark">Salvar</button>-->
+            <!--            </div>-->
+        </form>
+    </div>
 </div>

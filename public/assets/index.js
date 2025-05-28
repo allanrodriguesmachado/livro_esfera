@@ -6,7 +6,6 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'datatables.net-bs5';
 import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
 
-
 import {fetch} from "../js/app/livros";
 import {registro} from "../js/app/registro";
 
@@ -35,9 +34,6 @@ $('#toggleMode').on('click', () => {
     icon.toggleClass('fa-moon fa-sun');
 });
 $(document).ready(() => {
-    const timestamp = new Date().getTime();
-    // fetch(` / application / fetch ? _ = ${timestamp}`);
-    //
     fetch('/application/fetch');
     registro('/application/create')
 });

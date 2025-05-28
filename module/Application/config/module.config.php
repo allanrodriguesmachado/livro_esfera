@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace Application;
 
+use Application\Controller\AssuntoController;
+use Application\Controller\AutorController;
 use Application\Controller\IndexController;
+use Application\Controller\RelatorioController;
+use Application\Model\AssuntoModel;
+use Application\Model\AutorModel;
 use Application\Model\LivroModel;
 use Laminas\Db\Adapter\Adapter;
 use Laminas\Db\Adapter\AdapterServiceFactory;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
-use Laminas\ServiceManager\Factory\InvokableFactory;
 use Psr\Container\ContainerInterface;
 
 return [
@@ -21,7 +25,7 @@ return [
                 'options' => [
                     'route' => '/',
                     'defaults' => [
-                        'controller' => Controller\IndexController::class,
+                        'controller' => IndexController::class,
                         'action' => 'index',
                     ],
                 ],
@@ -31,8 +35,39 @@ return [
                 'options' => [
                     'route' => '/application[/:action]',
                     'defaults' => [
-                        'controller' => Controller\IndexController::class,
+                        'controller' => IndexController::class,
                         'action' => 'fetch',
+                    ],
+                ],
+            ],
+            'autor' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/autor[/:action]',
+                    'defaults' => [
+                        'controller' => AutorController::class,
+                        'action' => 'listar',
+                    ],
+                ],
+            ],
+
+            'assunto' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/assunto[/:action]',
+                    'defaults' => [
+                        'controller' => AssuntoController::class,
+                        'action' => 'listar',
+                    ],
+                ],
+            ],
+            'relatorio' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/relatorio/livros',
+                    'defaults' => [
+                        'controller' => RelatorioController::class,
+                        'action' => 'gerarRelatorio',
                     ],
                 ],
             ],
@@ -44,17 +79,31 @@ return [
             LivroModel::class => function (ContainerInterface $container) {
                 return new LivroModel($container->get(Adapter::class));
             },
+            AssuntoModel::class => function (ContainerInterface $container) {
+                return new AssuntoModel($container->get(Adapter::class));
+            },
+            AutorModel::class => function (ContainerInterface $container) {
+                return new AutorModel($container->get(Adapter::class));
+            }
         ],
     ],
     'controllers' => [
         'factories' => [
             IndexController::class => function (ContainerInterface $container) {
-                $livroModel = $container->get(LivroModel::class);
-                return new IndexController($livroModel);
+                return new IndexController($container->get(LivroModel::class));
             },
+
+            AssuntoController::class => function (ContainerInterface $container) {
+                return new AssuntoController($container->get(AssuntoModel::class));
+            },
+            AutorController::class => function (ContainerInterface $container) {
+                return new AutorController($container->get(AutorModel::class));
+            },
+             RelatorioController::class => function (ContainerInterface $container) {
+                return new RelatorioController($container->get(LivroModel::class));
+             },
         ],
     ],
-
     'view_manager' => [
         'display_not_found_reason' => true,
         'display_exceptions' => true,

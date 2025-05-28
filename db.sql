@@ -109,3 +109,21 @@ FROM livros
 
 
 cache clear  rm -rf data/cache/*
+
+
+CREATE OR REPLACE VIEW view_livros_autores_assuntos AS
+SELECT
+    l.id             AS livro_id,
+    l.titulo,
+    l.editora,                             -- adiciona a editora aqui
+    l.ano_publicacao,
+    l.valor,
+    a.nome           AS autor,
+    s.nome           AS assunto
+FROM livros l
+    JOIN livro_autor la ON la.livro_id = l.id
+    JOIN autores a ON a.id = la.autor_id
+    JOIN livro_assunto ls ON ls.livro_id = l.id
+    JOIN assuntos s ON s.id = ls.assunto_id
+WHERE l.ts_cancelado = FALSE
+ORDER BY a.nome, l.titulo;
