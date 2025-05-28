@@ -12,8 +12,7 @@ class LivroController extends AbstractActionController
 {
     public function __construct(
         private readonly LivroModel $livroModel
-    )
-    {
+    ) {
     }
 
     public function indexAction(): ViewModel

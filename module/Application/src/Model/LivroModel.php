@@ -79,108 +79,20 @@ class LivroModel
         }
     }
 
+    public function update(Parameters $data): void
+    {
+        $livroId = $data['id'] ?? null;
+        $params = $data['params'] ?? [];
 
-//    public function update(Parameters $data): void
-//    {
-//        $livroId = $data['id'] ?? null;
-//        $params = $data['params'] ?? [];
-//
-//        if (!$livroId) {
-//            throw new \InvalidArgumentException('ID do livro é obrigatório.');
-//        }
-//
-//        if (empty($params)) {
-//            return;
-//        }
-//
-//        $sql = '
-//        SELECT l.titulo, l.valor, a.nome AS autor, s.nome AS assunto
-//        FROM livros l
-//        JOIN livro_autor la ON la.livro_id = l.id
-//        JOIN autores a ON a.id = la.autor_id
-//        JOIN livro_assunto ls ON ls.livro_id = l.id
-//        JOIN assuntos s ON s.id = ls.assunto_id
-//        WHERE l.id = :id
-//        LIMIT 1
-//    ';
-//        $statement = $this->adapter->createStatement($sql, [':id' => $livroId]);
-//        $result = $statement->execute()->current();
-//
-//        if (!$result) {
-//            throw new \RuntimeException("Livro não encontrado.");
-//        }
-//
-//        $connection = $this->adapter->getDriver()->getConnection();
-//        $connection->beginTransaction();
-//
-//        try {
-//            $fieldsToUpdate = [];
-//            $paramsUpdate = [':id' => $livroId];
-//
-//            if (isset($params['titulo']) && $params['titulo'] !== $result['titulo']) {
-//                $fieldsToUpdate[] = 'titulo = :titulo';
-//                $paramsUpdate[':titulo'] = $params['titulo'];
-//            }
-//
-//            if (isset($params['valor']) && $params['valor'] !== $result['valor']) {
-//                $fieldsToUpdate[] = 'valor = :valor';
-//                $paramsUpdate[':valor'] = $params['valor'];
-//            }
-//
-//            if (!empty($fieldsToUpdate)) {
-//                $fieldsToUpdate[] = 'ts_atualizado = CURRENT_TIMESTAMP';
-//                $sqlUpdateLivro = 'UPDATE livros SET ' . implode(', ', $fieldsToUpdate) . ' WHERE id = :id';
-//                $stmtLivro = $this->adapter->createStatement($sqlUpdateLivro, $paramsUpdate);
-//                $stmtLivro->execute();
-//            }
-//
-//            if (isset($params['autor']) && $params['autor'] !== $result['autor']) {
-//                $sqlAutorId = 'SELECT autor_id FROM livro_autor WHERE livro_id = :id LIMIT 1';
-//                $stmtAutorId = $this->adapter->createStatement($sqlAutorId, [':id' => $livroId]);
-//                $autorId = $stmtAutorId->execute()->current()['autor_id'];
-//
-//                $sqlUpdateAutor = 'UPDATE autores SET nome = :nome, ts_atualizado = CURRENT_TIMESTAMP WHERE id = :id';
-//                $stmtAutor = $this->adapter->createStatement($sqlUpdateAutor, [
-//                    ':nome' => $params['autor'],
-//                    ':id' => $autorId,
-//                ]);
-//                $stmtAutor->execute();
-//            }
-//
-//            if (isset($params['assunto']) && $params['assunto'] !== $result['assunto']) {
-//                $sqlAssuntoId = 'SELECT assunto_id FROM livro_assunto WHERE livro_id = :id LIMIT 1';
-//                $stmtAssuntoId = $this->adapter->createStatement($sqlAssuntoId, [':id' => $livroId]);
-//                $assuntoId = $stmtAssuntoId->execute()->current()['assunto_id'];
-//
-//                $sqlUpdateAssunto = 'UPDATE assuntos SET nome = :nome, ts_atualizado = CURRENT_TIMESTAMP WHERE id = :id';
-//                $stmtAssunto = $this->adapter->createStatement($sqlUpdateAssunto, [
-//                    ':nome' => $params['assunto'],
-//                    ':id' => $assuntoId,
-//                ]);
-//                $stmtAssunto->execute();
-//            }
-//
-//            $connection->commit();
-//        } catch (\Exception $e) {
-//            $connection->rollback();
-//            throw new \RuntimeException('Erro ao atualizar livro: ' . $e->getMessage());
-//        }
-//    }
+        if (! $livroId) {
+            throw new \InvalidArgumentException('ID do livro é obrigatório.');
+        }
 
-public function update(Parameters $data): void
-{
-    $livroId = $data['id'] ?? null;
-    $params = $data['params'] ?? [];
+        if (empty($params)) {
+            return;
+        }
 
-    if (!$livroId) {
-        throw new \InvalidArgumentException('ID do livro é obrigatório.');
-    }
-
-    if (empty($params)) {
-        return;
-    }
-
-    $sql = '
+        $sql = '
         SELECT l.titulo, l.editora, l.valor, a.nome AS autor, s.nome AS assunto
         FROM livros l
         JOIN livro_autor la ON la.livro_id = l.id
@@ -190,80 +102,74 @@ public function update(Parameters $data): void
         WHERE l.id = :id
         LIMIT 1
     ';
-    $statement = $this->adapter->createStatement($sql, [':id' => $livroId]);
-    $result = $statement->execute()->current();
+        $statement = $this->adapter->createStatement($sql, [':id' => $livroId]);
+        $result = $statement->execute()->current();
 
-    if (!$result) {
-        throw new \RuntimeException("Livro não encontrado.");
-    }
-
-    $connection = $this->adapter->getDriver()->getConnection();
-    $connection->beginTransaction();
-
-    try {
-        $fieldsToUpdate = [];
-        $paramsUpdate = [':id' => $livroId];
-
-        // Atualiza título
-        if (isset($params['titulo']) && $params['titulo'] !== $result['titulo']) {
-            $fieldsToUpdate[] = 'titulo = :titulo';
-            $paramsUpdate[':titulo'] = $params['titulo'];
+        if (! $result) {
+            throw new \RuntimeException("Livro não encontrado.");
         }
 
-        // Atualiza editora
-        if (isset($params['editora']) && $params['editora'] !== $result['editora']) {
-            $fieldsToUpdate[] = 'editora = :editora';
-            $paramsUpdate[':editora'] = $params['editora'];
-        }
+        $connection = $this->adapter->getDriver()->getConnection();
+        $connection->beginTransaction();
 
-        // Atualiza valor
-        if (isset($params['valor']) && $params['valor'] !== $result['valor']) {
-            $fieldsToUpdate[] = 'valor = :valor';
-            $paramsUpdate[':valor'] = $params['valor'];
-        }
+        try {
+            $fieldsToUpdate = [];
+            $paramsUpdate = [':id' => $livroId];
 
-        // Se houver campos do livro a atualizar
-        if (!empty($fieldsToUpdate)) {
-            $fieldsToUpdate[] = 'ts_atualizado = CURRENT_TIMESTAMP';
-            $sqlUpdateLivro = 'UPDATE livros SET ' . implode(', ', $fieldsToUpdate) . ' WHERE id = :id';
-            $stmtLivro = $this->adapter->createStatement($sqlUpdateLivro, $paramsUpdate);
-            $stmtLivro->execute();
-        }
+            if (isset($params['titulo']) && $params['titulo'] !== $result['titulo']) {
+                $fieldsToUpdate[] = 'titulo = :titulo';
+                $paramsUpdate[':titulo'] = $params['titulo'];
+            }
 
-        // Atualiza autor se necessário
-        if (isset($params['autor']) && $params['autor'] !== $result['autor']) {
-            $sqlAutorId = 'SELECT autor_id FROM livro_autor WHERE livro_id = :id LIMIT 1';
-            $stmtAutorId = $this->adapter->createStatement($sqlAutorId, [':id' => $livroId]);
-            $autorId = $stmtAutorId->execute()->current()['autor_id'];
+            if (isset($params['editora']) && $params['editora'] !== $result['editora']) {
+                $fieldsToUpdate[] = 'editora = :editora';
+                $paramsUpdate[':editora'] = $params['editora'];
+            }
 
-            $sqlUpdateAutor = 'UPDATE autores SET nome = :nome, ts_atualizado = CURRENT_TIMESTAMP WHERE id = :id';
-            $stmtAutor = $this->adapter->createStatement($sqlUpdateAutor, [
+            if (isset($params['valor']) && $params['valor'] !== $result['valor']) {
+                $fieldsToUpdate[] = 'valor = :valor';
+                $paramsUpdate[':valor'] = $params['valor'];
+            }
+
+            if (! empty($fieldsToUpdate)) {
+                $fieldsToUpdate[] = 'ts_atualizado = CURRENT_TIMESTAMP';
+                $sqlUpdateLivro = 'UPDATE livros SET ' . implode(', ', $fieldsToUpdate) . ' WHERE id = :id';
+                $stmtLivro = $this->adapter->createStatement($sqlUpdateLivro, $paramsUpdate);
+                $stmtLivro->execute();
+            }
+
+            if (isset($params['autor']) && $params['autor'] !== $result['autor']) {
+                $sqlAutorId = 'SELECT autor_id FROM livro_autor WHERE livro_id = :id LIMIT 1';
+                $stmtAutorId = $this->adapter->createStatement($sqlAutorId, [':id' => $livroId]);
+                $autorId = $stmtAutorId->execute()->current()['autor_id'];
+
+                $sqlUpdateAutor = 'UPDATE autores SET nome = :nome, ts_atualizado = CURRENT_TIMESTAMP WHERE id = :id';
+                $stmtAutor = $this->adapter->createStatement($sqlUpdateAutor, [
                 ':nome' => $params['autor'],
                 ':id' => $autorId,
-            ]);
-            $stmtAutor->execute();
-        }
+                ]);
+                $stmtAutor->execute();
+            }
 
-        // Atualiza assunto se necessário
-        if (isset($params['assunto']) && $params['assunto'] !== $result['assunto']) {
-            $sqlAssuntoId = 'SELECT assunto_id FROM livro_assunto WHERE livro_id = :id LIMIT 1';
-            $stmtAssuntoId = $this->adapter->createStatement($sqlAssuntoId, [':id' => $livroId]);
-            $assuntoId = $stmtAssuntoId->execute()->current()['assunto_id'];
+            if (isset($params['assunto']) && $params['assunto'] !== $result['assunto']) {
+                $sqlAssuntoId = 'SELECT assunto_id FROM livro_assunto WHERE livro_id = :id LIMIT 1';
+                $stmtAssuntoId = $this->adapter->createStatement($sqlAssuntoId, [':id' => $livroId]);
+                $assuntoId = $stmtAssuntoId->execute()->current()['assunto_id'];
 
-            $sqlUpdateAssunto = 'UPDATE assuntos SET nome = :nome, ts_atualizado = CURRENT_TIMESTAMP WHERE id = :id';
-            $stmtAssunto = $this->adapter->createStatement($sqlUpdateAssunto, [
+                $sqlUpdateAssunto = 'UPDATE assuntos SET nome = :nome, ts_atualizado = CURRENT_TIMESTAMP WHERE id = :id';
+                $stmtAssunto = $this->adapter->createStatement($sqlUpdateAssunto, [
                 ':nome' => $params['assunto'],
                 ':id' => $assuntoId,
-            ]);
-            $stmtAssunto->execute();
-        }
+                ]);
+                $stmtAssunto->execute();
+            }
 
-        $connection->commit();
-    } catch (\Exception $e) {
-        $connection->rollback();
-        throw new \RuntimeException('Erro ao atualizar livro: ' . $e->getMessage());
+            $connection->commit();
+        } catch (\Exception $e) {
+            $connection->rollback();
+            throw new \RuntimeException('Erro ao atualizar livro: ' . $e->getMessage());
+        }
     }
-}
 
     public function delete(Parameters $id): void
     {
@@ -275,20 +181,19 @@ public function update(Parameters $data): void
         )->execute();
     }
 
-   public function buscarDadosRelatorio(): array
-   {
-    $sql = 'SELECT * FROM view_livros_autores_assuntos ORDER BY autor, titulo';
+    public function buscarDadosRelatorio(): array
+    {
+        $sql = 'SELECT * FROM view_livros_autores_assuntos ORDER BY autor, titulo';
 
-    $statement = $this->adapter->createStatement($sql);
-    $result = $statement->execute();
+        $statement = $this->adapter->createStatement($sql);
+        $result = $statement->execute();
 
-    $dados = [];
+        $dados = [];
 
-    foreach ($result as $row) {
-        $dados[] = $row;
+        foreach ($result as $row) {
+              $dados[] = $row;
+        }
+
+        return $dados;
     }
-
-    return $dados;
-}
-
 }

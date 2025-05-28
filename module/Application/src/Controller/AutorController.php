@@ -10,7 +10,8 @@ class AutorController extends AbstractActionController
 {
     public function __construct(
         private readonly AutorModel $autorModel
-    ) {}
+    ) {
+    }
 
     public function autoresAction(): JsonModel
     {
@@ -30,12 +31,11 @@ class AutorController extends AbstractActionController
     }
 
 
-
-        public function criarAction(): JsonModel
+    public function criarAction(): JsonModel
     {
         try {
             $nome = trim($this->params()->fromPost('nome'));
-            if (!$nome) {
+            if (! $nome) {
                 return new JsonModel([
                     'status' => 'error',
                     'message' => 'Nome do assunto é obrigatório.'
@@ -55,13 +55,13 @@ class AutorController extends AbstractActionController
         }
     }
 
-         public function editarAction(): JsonModel
+    public function editarAction(): JsonModel
     {
         try {
             $params = $this->getRequest()->getPost();
 
             $nome = trim($this->params()->fromPost('nome'));
-            if (!$nome) {
+            if (! $nome) {
                 return new JsonModel([
                     'status' => 'error',
                     'message' => 'Nome do assunto é obrigatório.'
@@ -81,7 +81,7 @@ class AutorController extends AbstractActionController
         }
     }
 
-       public function excluirAction(): JsonModel
+    public function excluirAction(): JsonModel
     {
         try {
             $params = $this->getRequest()->getPost();

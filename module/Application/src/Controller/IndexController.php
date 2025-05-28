@@ -26,7 +26,7 @@ class IndexController extends AbstractActionController
         });
     }
 
- public function createAction(): JsonModel
+    public function createAction(): JsonModel
     {
         $params = $this->getRequest()->getPost();
 
@@ -38,8 +38,8 @@ class IndexController extends AbstractActionController
             ]);
         } catch (\Exception $e) {
             return new JsonModel([
-                'status' => 'error',
-                'message' => 'Erro ao criar o livro: ' . $e->getMessage(),
+            'status' => 'error',
+            'message' => 'Erro ao criar o livro: ' . $e->getMessage(),
             ]);
         }
     }

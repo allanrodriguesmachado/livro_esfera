@@ -115,7 +115,7 @@ CREATE OR REPLACE VIEW view_livros_autores_assuntos AS
 SELECT
     l.id             AS livro_id,
     l.titulo,
-    l.editora,                             -- adiciona a editora aqui
+    l.editora,
     l.ano_publicacao,
     l.valor,
     a.nome           AS autor,

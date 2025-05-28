@@ -10,8 +10,7 @@ class AssuntoController extends AbstractActionController
 {
     public function __construct(
         private readonly AssuntoModel $assuntoModel
-    )
-    {
+    ) {
     }
 
     public function assuntosAction(): JsonModel
@@ -35,7 +34,7 @@ class AssuntoController extends AbstractActionController
     {
         try {
             $nome = trim($this->params()->fromPost('nome'));
-            if (!$nome) {
+            if (! $nome) {
                 return new JsonModel([
                     'status' => 'error',
                     'message' => 'Nome do assunto é obrigatório.'
@@ -55,13 +54,13 @@ class AssuntoController extends AbstractActionController
         }
     }
 
-      public function editarAction(): JsonModel
+    public function editarAction(): JsonModel
     {
         try {
             $params = $this->getRequest()->getPost();
 
             $nome = trim($this->params()->fromPost('nome'));
-            if (!$nome) {
+            if (! $nome) {
                 return new JsonModel([
                     'status' => 'error',
                     'message' => 'Nome do assunto é obrigatório.'
@@ -81,7 +80,7 @@ class AssuntoController extends AbstractActionController
         }
     }
 
-       public function excluirAction(): JsonModel
+    public function excluirAction(): JsonModel
     {
         try {
             $params = $this->getRequest()->getPost();

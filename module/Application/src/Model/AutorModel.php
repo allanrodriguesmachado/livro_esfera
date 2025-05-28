@@ -30,7 +30,7 @@ class AutorModel
     {
         $nome = is_string($params) ? $params : $params['nome'] ?? null;
 
-        if (!$nome) {
+        if (! $nome) {
             throw new \InvalidArgumentException('Nome do autor é obrigatório.');
         }
 
@@ -39,19 +39,19 @@ class AutorModel
         $result = $stmt->execute();
 
         $row = $result->current();
-        if (!$row || !isset($row['id'])) {
+        if (! $row || ! isset($row['id'])) {
             throw new \RuntimeException('Falha ao obter o ID do autor após inserção.');
         }
 
         return (int)$row['id'];
     }
 
- public function update(Parameters $params): void
+    public function update(Parameters $params): void
     {
         $id = $params->get('id');
         $nome = $params->get('nome');
 
-        if (!$id || !$nome) {
+        if (! $id || ! $nome) {
             throw new \InvalidArgumentException('ID e nome são obrigatórios.');
         }
 
