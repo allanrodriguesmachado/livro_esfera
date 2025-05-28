@@ -13,14 +13,6 @@
  */
 
 return [
-//    'db' => [
-//        'driver'   => 'Pdo',
-//        'dsn'      => 'sqlite:' . __DIR__ . '/../../data/db.sqlite',
-//        'driver_options' => [
-//            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-//        ],
-//    ],
-
         'db' => [
             'driver'   => 'Pdo_Pgsql',
             'hostname' => 'db',

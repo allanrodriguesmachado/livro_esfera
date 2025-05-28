@@ -25,7 +25,6 @@ lottie.loadAnimation({
     },
 });
 
-
 window.$ = $;
 window.jQuery = $;
 
@@ -36,6 +35,9 @@ $('#toggleMode').on('click', () => {
     icon.toggleClass('fa-moon fa-sun');
 });
 $(document).ready(() => {
+    const timestamp = new Date().getTime();
+    // fetch(` / application / fetch ? _ = ${timestamp}`);
+    //
     fetch('/application/fetch');
-    registro()
+    registro('/application/create')
 });

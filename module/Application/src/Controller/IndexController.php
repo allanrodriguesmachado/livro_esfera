@@ -22,16 +22,35 @@ class IndexController extends AbstractActionController
     public function fetchAction(): JsonModel
     {
         try {
-            $livros = $this->livroModel->fetchLivros();
-
             return new JsonModel([
                 'status' => 'success',
-                'data' => $livros,
+                'data' => $this->livroModel->fetchLivros(),
             ]);
         } catch (\Exception $e) {
             return new JsonModel([
                 'status' => 'error',
                 'message' => 'Erro ao buscar os livros: ' . $e->getMessage(),
+            ]);
+        }
+    }
+
+    public function createAction(): JsonModel
+    {
+        $params = $this->getRequest()->getPost();
+        $formDataString = $params['formData'];
+
+        $formData = [];
+        parse_str($formDataString, $formData);
+
+        try {
+            return new JsonModel([
+                'status' => 'success',
+                'data' => $this->livroModel->criar($formData),
+            ]);
+        } catch (\Exception $e) {
+            return new JsonModel([
+                'status' => 'error',
+                'message' => 'Erro ao criar o livro: ' . $e->getMessage(),
             ]);
         }
     }

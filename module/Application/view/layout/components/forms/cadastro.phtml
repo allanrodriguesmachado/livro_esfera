@@ -1,66 +1,45 @@
-<div class="my-5 d-none" id="livro-cadastro">
-    <form>
-        <div class="row mb-4">
-            <div class="col">
-                <div class="form-outline">
-                    <label class="form-label fw-bold" for="autorLivro"><i class="fas fa-user-alt text-dark me-2"></i> Autor do Livro</label>
-                    <input
-                            type="text"
-                            id="autorLivro"
-                            name="autorLivro"
-                            class="form-control"
-                            placeholder="Digite o nome do autor"
-                            required
-                    />
-                </div>
+<div class="container my-5" id="livro-cadastro">
+    <form id="formLivro" >
+        <div class="row mb-3">
+            <div class="col-12 col-md-6 mb-3">
+                <label class="form-label fw-bold" for="tituloLivro"><i class="fas fa-book text-dark me-2"></i> Título</label>
+                <input type="text" id="tituloLivro" name="titulo" class="form-control" required>
             </div>
-<!--            <div class="col">-->
-<!--                <div class="form-outline">-->
-<!--                    <label class="form-label" for="form6Example2">Last name</label>-->
-<!--                    <input type="text" id="form6Example2" class="form-control" placeholder=" " />-->
-<!--                </div>-->
-<!--            </div>-->
+
+            <div class="col-12 col-md-6 mb-3">
+                <label class="form-label fw-bold" for="editoraLivro"><i class="fas fa-building text-dark me-2"></i> Editora</label>
+                <input type="text" id="editoraLivro" name="editora" class="form-control" required>
+            </div>
         </div>
 
-<!--        <div class="form-outline mb-4">-->
-<!--            <input type="text" id="form6Example3" class="form-control" placeholder=" " />-->
-<!--            <label class="form-label" for="form6Example3">Company name</label>-->
-<!--        </div>-->
-<!---->
-<!--        <div class="form-outline mb-4">-->
-<!--            <input type="text" id="form6Example4" class="form-control" placeholder=" " />-->
-<!--            <label class="form-label" for="form6Example4">Address</label>-->
-<!--        </div>-->
-<!---->
-<!--        <div class="form-outline mb-4">-->
-<!--            <input type="email" id="form6Example5" class="form-control" placeholder=" " />-->
-<!--            <label class="form-label" for="form6Example5">Email</label>-->
-<!--        </div>-->
-<!---->
-<!--        <div class="form-outline mb-4">-->
-<!--            <input type="number" id="form6Example6" class="form-control" placeholder=" " />-->
-<!--            <label class="form-label" for="form6Example6">Phone</label>-->
-<!--        </div>-->
-<!---->
-<!--        <div class="form-outline mb-4">-->
-<!--            <textarea class="form-control" id="form6Example7" rows="4" placeholder=" "></textarea>-->
-<!--            <label class="form-label" for="form6Example7">Additional information</label>-->
-<!--        </div>-->
-<!---->
-<!--        <div class="form-check d-flex justify-content-center mb-4">-->
-<!--            <input-->
-<!--                class="form-check-input me-2"-->
-<!--                type="checkbox"-->
-<!--                value=""-->
-<!--                id="form6Example8"-->
-<!--                checked-->
-<!--            />-->
-<!--            <label class="form-check-label" for="form6Example8"> Create an account? </label>-->
-<!--        </div>-->
+        <div class="row mb-3">
+            <div class="col-12 col-md-4 mb-3">
+                <label class="form-label fw-bold" for="anoPublicacao"><i class="fas fa-calendar-alt text-dark me-2"></i> Ano</label>
+                <input type="number" id="anoPublicacao" name="ano_publicacao" class="form-control" required>
+            </div>
+
+            <div class="col-12 col-md-4 mb-3">
+                <label class="form-label fw-bold" for="valorLivro"><i class="fas fa-dollar-sign text-dark me-2"></i> Valor</label>
+                <input type="number" step="0.01" id="valorLivro" name="valor" class="form-control" required>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-12 col-md-6 mb-3">
+                <label class="form-label fw-bold" for="autorLivro"><i class="fas fa-user-alt text-dark me-2"></i> Autor</label>
+                <input type="text" id="autorLivro" name="autor" class="form-control" required>
+            </div>
+
+            <div class="col-12 col-md-6 mb-3">
+                <label class="form-label fw-bold" for="assuntoLivro"><i class="fas fa-tags text-dark me-2"></i> Assunto</label>
+                <input type="text" id="assuntoLivro" name="assunto" class="form-control" required>
+            </div>
+        </div>
 
         <div class="d-flex justify-content-end">
-            <button type="button" id="btnSalvar" class="btn btn-dark btn-block mb-4">
-                <i class="fas fa-save text-white me-2"></i> Salvar</button>
+            <button id="btnSalvar" type="button" class="btn btn-dark">
+                <i class="fas fa-save me-2"></i> Salvar
+            </button>
         </div>
     </form>
 </div>

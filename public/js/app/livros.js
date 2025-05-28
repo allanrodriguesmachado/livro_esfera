@@ -8,6 +8,11 @@ let table = new DataTable('#myTable', {
     info: true,
     order: [[1, "asc"]],
     columns: [
+        {
+            data: 'livro_id',
+            title: 'ID',
+            visible: false
+        },
         {data: 'titulo', title: 'Título'},
         {
             data: 'valor',
@@ -24,6 +29,22 @@ let table = new DataTable('#myTable', {
     },
     ]
 });
+
+$('#myTable tbody').on('click', 'tr', function() {
+    const data = table.row(this).data();
+    if (data) {
+        console.log('ID do livro clicado:', data.livro_id
+        );
+        console.log('Dados completos:', data);
+
+        // Remove seleção anterior
+        table.$('tr.selected').removeClass('selected');
+        // Adiciona seleção na linha atual
+        $(this).addClass('selected');
+    }
+});
+
+
 
 export function fetch(url)
 {
@@ -65,7 +86,7 @@ function esconderLoader()
 
 $('#btnRegister').on('click', () => {
     $("#livro-hide").toggleClass('d-none');
-    $("#livro-cadastro").toggleClass('d-none');
+    // $("#livro-cadastro").toggleClass('d-none');
 });
 
 
