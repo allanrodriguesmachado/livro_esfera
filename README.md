@@ -178,6 +178,6 @@ Este projeto será apresentado tecnicamente durante a entrevista, onde será pos
 
 ---
 
-**Desenvolvido por:** \[Seu Nome Aqui]
+**Desenvolvido por:** Allan Rodrigues
 
 **Projeto:** Livro Esfera - Desafio Técnico
