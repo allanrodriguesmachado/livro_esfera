@@ -86,7 +86,7 @@ function esconderLoader()
 
 $('#btnRegister').on('click', () => {
     $("#livro-hide").toggleClass('d-none');
-    // $("#livro-cadastro").toggleClass('d-none');
+    $("#livro-cadastro").toggleClass('d-none');
 });
 
 
