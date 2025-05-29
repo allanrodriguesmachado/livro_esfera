@@ -203,3 +203,36 @@ body.dark-mode .form-select option {
     background-color: #1e1e1e;
     color: #eee;
 }
+
+
+/* Footer modo claro (default) */
+.footer {
+    background-color: #f8f9fa; /* bg-light */
+    color: #6c757d; /* texto cinza */
+    border-top: 1px solid #ddd;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Links do footer no modo claro */
+.footer-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+/* Footer modo escuro - só texto branco */
+body.dark-mode .footer {
+    background-color: #1e1e1e;
+    color: #fff; /* texto branco */
+    border-top: 1px solid #444;
+}
+
+/* Links no modo escuro ficam iguais ao modo claro */
+body.dark-mode .footer-link {
+    color: #007bff; /* mantém azul padrão */
+}
+
+body.dark-mode .footer-link:hover,
+body.dark-mode .footer-link:focus {
+    color: #0056b3;
+    text-decoration: underline;
+}

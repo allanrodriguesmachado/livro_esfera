@@ -25,7 +25,7 @@ class AutorController extends AbstractActionController
         } catch (\Throwable $e) {
             return new JsonModel([
                 'status' => 'error',
-                'message' => 'Erro ao listar autores: ' . $e->getMessage()
+                'message' => $e->getMessage()
             ]);
         }
     }
@@ -50,7 +50,7 @@ class AutorController extends AbstractActionController
         } catch (\Throwable $e) {
             return new JsonModel([
                 'status' => 'error',
-                'message' => 'Erro ao cadastrar assunto: ' . $e->getMessage()
+                'message' => $e->getMessage()
             ]);
         }
     }
@@ -76,7 +76,7 @@ class AutorController extends AbstractActionController
         } catch (\Throwable $e) {
             return new JsonModel([
                 'status' => 'error',
-                'message' => 'Erro ao cadastrar assunto: ' . $e->getMessage()
+                'message' => $e->getMessage()
             ]);
         }
     }
@@ -94,7 +94,7 @@ class AutorController extends AbstractActionController
         } catch (\Throwable $e) {
             return new JsonModel([
                 'status' => 'error',
-                'message' => 'Erro ao cadastrar assunto: ' . $e->getMessage()
+                'message' => $e->getMessage()
             ]);
         }
     }

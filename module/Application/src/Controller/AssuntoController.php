@@ -16,7 +16,7 @@ class AssuntoController extends AbstractActionController
     public function assuntosAction(): JsonModel
     {
         try {
-            $autores = $this->assuntoModel->fetchAll();
+            $autores = $this->assuntoModel->listar();
 
             return new JsonModel([
                 'status' => 'success',
@@ -25,7 +25,7 @@ class AssuntoController extends AbstractActionController
         } catch (\Throwable $e) {
             return new JsonModel([
                 'status' => 'error',
-                'message' => 'Erro ao listar autores: ' . $e->getMessage()
+                'message' => $e->getMessage()
             ]);
         }
     }
@@ -49,7 +49,7 @@ class AssuntoController extends AbstractActionController
         } catch (\Throwable $e) {
             return new JsonModel([
                 'status' => 'error',
-                'message' => 'Erro ao cadastrar assunto: ' . $e->getMessage()
+                'message' => $e->getMessage()
             ]);
         }
     }
@@ -75,7 +75,7 @@ class AssuntoController extends AbstractActionController
         } catch (\Throwable $e) {
             return new JsonModel([
                 'status' => 'error',
-                'message' => 'Erro ao cadastrar assunto: ' . $e->getMessage()
+                'message' => $e->getMessage()
             ]);
         }
     }
@@ -93,7 +93,7 @@ class AssuntoController extends AbstractActionController
         } catch (\Throwable $e) {
             return new JsonModel([
                 'status' => 'error',
-                'message' => 'Erro ao cadastrar assunto: ' . $e->getMessage()
+                'message' => $e->getMessage()
             ]);
         }
     }

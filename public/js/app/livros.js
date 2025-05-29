@@ -41,7 +41,7 @@ let table = new DataTable('#myTable', {
             data: 'livro_id',
             title: 'ID',
             visible: false
-        },
+    },
         {data: 'titulo', title: 'Título'},
         {data: 'autor', title: 'Autor'},
         {data: 'editora', title: 'Editora'},
@@ -59,17 +59,18 @@ let table = new DataTable('#myTable', {
                 }
                 return data;
             },
-        },
+    },
         {
             data: 'acao',
             title: 'Ação',
             orderable: false,
             searchable: false
-        }
+    }
     ]
 });
 
-export function fetch(url, callback) {
+export function fetch(url, callback)
+{
     mostrarLoader();
 
     $.ajax({
@@ -100,7 +101,9 @@ export function fetch(url, callback) {
 
                 table.clear().rows.add(livrosComAcoes).draw();
 
-                if (typeof callback === 'function') callback();
+                if (typeof callback === 'function') {
+                    callback();
+                }
             } else {
                 $('#erro').removeClass('d-none').text(response.message);
             }
@@ -116,7 +119,7 @@ $('#btnRegister').on('click', () => {
     const $cadastro = $('#livro-cadastro');
     const $lista = $('#livro-hide');
 
-    const isCadastroVisivel = !$cadastro.hasClass('d-none');
+    const isCadastroVisivel = ! $cadastro.hasClass('d-none');
 
     $cadastro.toggleClass('d-none');
     $lista.toggleClass('d-none');
@@ -144,7 +147,8 @@ $('#btnRegister').on('click', () => {
 });
 
 
-function carregarDadosSelects(callback) {
+function carregarDadosSelects(callback)
+{
     let carregouAutores = false;
     let carregouAssuntos = false;
 
@@ -165,19 +169,119 @@ function carregarDadosSelects(callback) {
     });
 }
 
+// $('#myTable').on('click', '.btn-editar', function () {
+//     const rowData = table.row($(this).closest('tr')).data();
+//
+//     Swal.fire({
+//         title: 'Editar Livro',
+//         html: `
+//         <button class="btn btn-sm btn-primary btn-editar" data-id="${livro.livro_id}" title="Editar">
+//                             <i class="fa fa-edit"></i>
+//                         </button>
+//                         <button class="btn btn-sm btn-danger btn-excluir" data-id="${livro.livro_id}" title="Excluir">
+//                             <i class="fa fa-trash"></i>
+//                         </button>
+//         `,
+//         didOpen: () => {
+//             $('#swal-input-ano').on('input', function () {
+//                 this.value = this.value.slice(0, 4);
+//             });
+//
+//             $('#swal-input-valor').on('input', function () {
+//                 let raw = this.value.replace(/\D/g, '');
+//                 let float = parseFloat(raw) / 100;
+//
+//                 if (! isNaN(float)) {
+//                     this.value = float.toLocaleString('pt-BR', {
+//                         style: 'currency',
+//                         currency: 'BRL'
+//                     });
+//                 } else {
+//                     this.value = '';
+//                 }
+//             });
+//         },
+//         focusConfirm: false,
+//         showCancelButton: true,
+//         confirmButtonText: 'Salvar',
+//         cancelButtonText: 'Cancelar',
+//         preConfirm: () => {
+//             const titulo = $('#swal-input-titulo').val().trim();
+//             const editora = $('#swal-input-editora').val().trim();
+//             const ano_publicacao = $('#swal-input-ano').val().trim();
+//             const valorFormatado = $('#swal-input-valor').val().trim();
+//
+//             if (! titulo || ! editora || ! ano_publicacao || ! valorFormatado) {
+//                 Swal.showValidationMessage('Todos os campos são obrigatórios.');
+//                 return false;
+//             }
+//
+//             const valor = parseFloat(valorFormatado.replace(/[R$\s.]/g, '').replace(',', '.'));
+//
+//             if (isNaN(valor) || valor <= 0) {
+//                 Swal.showValidationMessage('Informe um valor numérico válido.');
+//                 return false;
+//             }
+//
+//             return {
+//                 titulo,
+//                 editora,
+//                 ano_publicacao,
+//                 valor
+//             };
+//         }
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//             const params = result.value;
+//
+//             if (params.titulo === rowData.titulo) {
+//                 delete params.titulo;
+//             }
+//             if (params.editora === rowData.editora) {
+//                 delete params.editora;
+//             }
+//             if (params.ano_publicacao == rowData.ano_publicacao) {
+//                 delete params.ano_publicacao;
+//             }
+//             if (parseFloat(params.valor) === parseFloat(rowData.valor)) {
+//                 delete params.valor;
+//             }
+//
+//             if (Object.keys(params).length === 0) {
+//                 showToast('warning', 'Nenhuma alteração foi feita.');
+//                 return;
+//             }
+//
+//             atualizarLivro(rowData.livro_id, params);
+//         }
+//     });
+// });
+
 $('#myTable').on('click', '.btn-editar', function () {
     const rowData = table.row($(this).closest('tr')).data();
 
     Swal.fire({
         title: 'Editar Livro',
         html: `
-            <input id="swal-input-titulo" class="swal2-input" placeholder="Título" value="${rowData.titulo}">
-            <input id="swal-input-editora" class="swal2-input" placeholder="Editora" value="${rowData.editora || ''}">
-            <input id="swal-input-ano" class="swal2-input" placeholder="Ano Publicação" type="number" value="${rowData.ano_publicacao || ''}">
-            <input id="swal-input-valor" class="swal2-input" placeholder="Valor" type="text" value="${parseFloat(rowData.valor).toLocaleString('pt-BR', {minimumFractionDigits: 2})}">
+            <div class="form-group">
+                <label for="swal-input-titulo">Título</label>
+                <input id="swal-input-titulo" class="form-control" type="text" value="${rowData.titulo}" />
+            </div>
+            <div class="form-group mt-2">
+                <label for="swal-input-editora">Editora</label>
+                <input id="swal-input-editora" class="form-control" type="text" value="${rowData.editora}" />
+            </div>
+            <div class="form-group mt-2">
+                <label for="swal-input-ano">Ano de Publicação</label>
+                <input id="swal-input-ano" class="form-control" type="number" value="${rowData.ano_publicacao}" />
+            </div>
+            <div class="form-group mt-2">
+                <label for="swal-input-valor">Valor</label>
+                <input id="swal-input-valor" class="form-control" type="text" value="${rowData.valor}" />
+            </div>
         `,
         didOpen: () => {
-            // Limitar ano para 4 dígitos
+            // Limitar o ano para 4 dígitos
             $('#swal-input-ano').on('input', function () {
                 this.value = this.value.slice(0, 4);
             });
@@ -230,10 +334,18 @@ $('#myTable').on('click', '.btn-editar', function () {
         if (result.isConfirmed) {
             const params = result.value;
 
-            if (params.titulo === rowData.titulo) delete params.titulo;
-            if (params.editora === rowData.editora) delete params.editora;
-            if (params.ano_publicacao == rowData.ano_publicacao) delete params.ano_publicacao;
-            if (parseFloat(params.valor) === parseFloat(rowData.valor)) delete params.valor;
+            if (params.titulo === rowData.titulo) {
+                delete params.titulo;
+            }
+            if (params.editora === rowData.editora) {
+                delete params.editora;
+            }
+            if (params.ano_publicacao == rowData.ano_publicacao) {
+                delete params.ano_publicacao;
+            }
+            if (parseFloat(params.valor) === parseFloat(rowData.valor)) {
+                delete params.valor;
+            }
 
             if (Object.keys(params).length === 0) {
                 showToast('warning', 'Nenhuma alteração foi feita.');
@@ -273,7 +385,7 @@ const atualizarLivro = (id, params) => {
                         .map(k => nomesCampos[k]);
 
                     const mensagem = alterados.length > 0
-                        ? `${alterados.join(' e ')} atualizado${alterados.length > 1 ? 's' : ''} com sucesso!`
+                        ? `${alterados.join(' e ')} atualizado${alterados.length > 1 ? 's' : ''} com sucesso! `
                         : 'Livro atualizado com sucesso!';
 
                     showToast('success', mensagem);
@@ -336,11 +448,13 @@ const excluirLivro = (id) => {
     });
 };
 
-function mostrarLoader() {
+function mostrarLoader()
+{
     $('#loaderOverlay').fadeIn();
 }
 
-function esconderLoader() {
+function esconderLoader()
+{
     $('#loaderOverlay').fadeOut();
 }
 

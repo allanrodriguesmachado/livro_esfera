@@ -1,8 +1,29 @@
-<!--<footer class="footer fixed-bottom bg-light py-3 text-center text-muted">-->
-<!--    <div class="container">-->
-<!--        <p class="mb-1">© 2025 Livro Esfera. Todos os direitos reservados.</p>-->
-<!--        <p>-->
-<!--            Desenvolvido por <a href="https://seusite.com" class="footer-link">Allan.R</a>-->
-<!--        </p>-->
-<!--    </div>-->
-<!--</footer>-->
+<footer class="footer fixed-bottom">
+    <div class="container d-flex flex-column flex-sm-row justify-content-between align-items-center py-2">
+        <p class="mb-2 mb-sm-0 small">
+            <i class="fas fa-book me-2" style="color:#4a90e2;"></i>
+            © 2025 Livro Esfera. Todos os direitos reservados.
+        </p>
+    </div>
+</footer>
+
+
+<style>
+    .footer-link {
+        color: #007bff;
+        transition: color 0.3s ease;
+    }
+
+    .footer-link:hover, .footer-link:focus {
+        color: #0056b3;
+        text-decoration: underline;
+    }
+
+    @media (max-width: 576px) {
+        .footer {
+            font-size: 0.85rem;
+            padding-top: 1rem !important;
+            padding-bottom: 1rem !important;
+        }
+    }
+</style>

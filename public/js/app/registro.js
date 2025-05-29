@@ -28,6 +28,12 @@ export function registro(url) {
             formValido = false;
         }
 
+        if (!formValido) {
+            showToast('error', 'Preencha todos os campos obrigatórios.');
+            $('#tituloLivro').focus();
+            return;
+        }
+
         const titulo = $('#tituloLivro').val().trim();
         const editora = $('#editoraLivro').val().trim();
         const anoPublicacao = $('#anoPublicacao').val().trim();
@@ -35,16 +41,47 @@ export function registro(url) {
         const autorId = $('#autorLivro').val();
         const assuntoId = $('#assuntoLivro').val();
 
-        if (!titulo) marcarInvalido('#tituloLivro');
-        if (!editora) marcarInvalido('#editoraLivro');
-        if (!anoPublicacao) marcarInvalido('#anoPublicacao');
-        if (!valor) marcarInvalido('#valorLivro');
-        if (!autorId) marcarInvalido('#autorLivro');
-        if (!assuntoId) marcarInvalido('#assuntoLivro');
+
+        if (!titulo) {
+            marcarInvalido('#tituloLivro');
+            formValido = false;
+        }
+        if (!editora) {
+            marcarInvalido('#editoraLivro');
+            formValido = false;
+        }
+        if (!anoPublicacao) {
+            marcarInvalido('#anoPublicacao');
+            formValido = false;
+        }
+        if (!valor) {
+            marcarInvalido('#valorLivro');
+            formValido = false;
+        }
+        if (!autorId) {
+            marcarInvalido('#autorLivro');
+            formValido = false;
+        }
+        if (!assuntoId) {
+            marcarInvalido('#assuntoLivro');
+            formValido = false;
+        }
 
         if (!formValido) {
             showToast('error', 'Preencha todos os campos obrigatórios.');
             $('#tituloLivro').focus();
+            return;
+        }
+
+        let valorLimpo = valor.replace('R$', '').trim().replace(',', '.');
+
+        if (!valorLimpo || parseFloat(valorLimpo) < 1) {
+            showToast('error', 'O valor informado deve ser maior ou igual a 1 real.');
+            return;
+        }
+
+        if (anoPublicacao.length < 4 || isNaN(anoPublicacao)) {
+            showToast('error', 'O ano de publicação precisa ter 4 dígitos.');
             return;
         }
 
@@ -282,7 +319,7 @@ $(document).on('click', '.btn-editar-assunto', function () {
                     if (res.status === 'success') {
                         showToast('success', 'Assunto atualizado!');
                         carregarListaAssuntos();
-                        listarAutores();
+                        listarAssuntos();
                     } else {
                         showToast('error', res.message || 'Erro ao editar.');
                     }
@@ -313,7 +350,7 @@ $(document).on('click', '.btn-excluir-assunto', function () {
                     if (res.status === 'success') {
                         showToast('success', 'Assunto excluído com sucesso!');
                         carregarListaAssuntos();
-                        listarAutores();
+                        listarAssuntos();
                     } else {
                         showToast('error', res.message || 'Erro ao excluir assunto.');
                     }

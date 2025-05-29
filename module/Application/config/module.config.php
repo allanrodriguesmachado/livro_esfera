@@ -4,17 +4,10 @@ declare(strict_types=1);
 
 namespace Application;
 
-use Application\Controller\AssuntoController;
-use Application\Controller\AutorController;
-use Application\Controller\IndexController;
-use Application\Controller\RelatorioController;
-use Application\Model\AssuntoModel;
-use Application\Model\AutorModel;
-use Application\Model\LivroModel;
-use Laminas\Db\Adapter\Adapter;
-use Laminas\Db\Adapter\AdapterServiceFactory;
-use Laminas\Router\Http\Literal;
-use Laminas\Router\Http\Segment;
+use Application\Controller\{AssuntoController, AutorController, IndexController, RelatorioController};
+use Application\Model\{AssuntoModel, AutorModel, LivroModel};
+use Laminas\Router\Http\{Literal, Segment};
+use Laminas\Db\Adapter\{Adapter, AdapterServiceFactory};
 use Psr\Container\ContainerInterface;
 
 return [
