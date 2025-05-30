@@ -33,7 +33,7 @@ class AssuntoModel
         try {
             $nome = is_string($params) ? $params : $params['nome'] ?? null;
 
-            if (!$nome) {
+            if (! $nome) {
                 throw new \InvalidArgumentException('Nome do assunto é obrigatório.');
             }
 
@@ -45,7 +45,7 @@ class AssuntoModel
 
             $row = $result->current();
 
-            if (!$row || !isset($row['id'])) {
+            if (! $row || ! isset($row['id'])) {
                 throw new \RuntimeException('Falha ao obter o ID do assunto após inserção.');
             }
 
@@ -61,7 +61,7 @@ class AssuntoModel
             $id = $params->get('id');
             $nome = $params->get('nome');
 
-            if (!$id || !$nome) {
+            if (! $id || ! $nome) {
                 throw new \InvalidArgumentException('ID e nome são obrigatórios.');
             }
 
@@ -82,13 +82,12 @@ class AssuntoModel
         try {
             $id = $params->get('id');
 
-            if (!$id) {
+            if (! $id) {
                 throw new \InvalidArgumentException('ID é obrigatório para exclusão.');
             }
 
             $sql = 'UPDATE assuntos SET ts_cancelado = TRUE WHERE id = :id';
             $this->adapter->createStatement($sql, [':id' => $id])->execute();
-
         } catch (\Throwable $e) {
             throw new \RuntimeException('Erro ao excluir assunto: ' . $e->getMessage(), 0, $e);
         }
@@ -100,9 +99,11 @@ class AssuntoModel
         if ($texto === '') {
             throw new \InvalidArgumentException("O campo {$campo} é obrigatório.");
         }
-        if (!filter_var($texto, FILTER_VALIDATE_REGEXP, [
+        if (
+            ! filter_var($texto, FILTER_VALIDATE_REGEXP, [
             'options' => ['regexp' => '/^[\p{L}\p{N}\s\'\-]+$/u']
-        ])) {
+            ])
+        ) {
             throw new \InvalidArgumentException("O campo {$campo} contém caracteres inválidos.");
         }
     }

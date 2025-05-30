@@ -12,7 +12,7 @@ class AutorModel
     {
     }
 
-    public function fetchAll(): array
+    public function listar(): array
     {
         try {
             $result = $this->adapter

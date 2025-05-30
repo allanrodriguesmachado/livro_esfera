@@ -24,7 +24,7 @@ class IndexController extends AbstractActionController
         try {
             return new JsonModel([
                 'status' => 'success',
-                'data' => $this->livroModel->fetchLivros(),
+                'data' => $this->livroModel->listar(),
             ]);
         } catch (\Exception $e) {
             return new JsonModel([

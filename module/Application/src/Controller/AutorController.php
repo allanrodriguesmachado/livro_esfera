@@ -16,7 +16,7 @@ class AutorController extends AbstractActionController
     public function autoresAction(): JsonModel
     {
         try {
-            $autores = $this->autorModel->fetchAll();
+            $autores = $this->autorModel->listar();
 
             return new JsonModel([
                 'status' => 'success',
@@ -29,7 +29,6 @@ class AutorController extends AbstractActionController
             ]);
         }
     }
-
 
     public function criarAction(): JsonModel
     {

@@ -12,7 +12,7 @@ class LivroModel
     {
     }
 
-    public function fetchLivros(): array
+    public function listar(): array
     {
         try {
             $result = $this->adapter
