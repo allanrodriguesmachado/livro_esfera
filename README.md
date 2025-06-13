@@ -163,8 +163,6 @@ Acesse via: `http://localhost:8080`
 * Componentização JS com Webpack
 * Integração dinâmica e responsiva
 * Código pronto para expansão e integração futura
-* TDD não foi implementado, mas o código está preparado para isso
-
 ---
 
 ## 📆 Apresentação
