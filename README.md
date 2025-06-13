@@ -30,7 +30,7 @@ O sistema **Livro Esfera** foi desenvolvido como parte de um **desafio técnico*
 * [x] Manipulação dinâmica via jQuery e AJAX
 * [x] SweetAlert2 para confirmações e edições
 * [x] Relatório PDF agrupado por autor (via view)
-* [ ] TDD (não implementado, previsto como diferencial)
+* [x] TDD
 
 ---
 
